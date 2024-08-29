@@ -29,9 +29,14 @@ def ConnectRobot():
         raise e
 
 
-def RunPoint(move: DobotApiMove, point_list: list):
+def RunPoint(move: DobotApiMove, point_list: list,speedlparam):
     move.MovL(point_list[0], point_list[1], point_list[2],
-              point_list[3], point_list[4], point_list[5])
+              point_list[3], point_list[4], point_list[5],speedlparam)
+
+def RunCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
+   move.Circle3(point_list1[0], point_list1[1], point_list1[2], point_list1[3], point_list1[4], point_list1[5],point_list2[0], point_list2[1], point_list2[2], point_list2[3], point_list2[4], point_list2[5],count,speedlparam,acclparam)     
+
+
 
 
 def GetFeed(feed: DobotApi):
@@ -129,14 +134,30 @@ if __name__ == '__main__':
     feed_thread1.start()
     print("开始使能...")
     dashboard.EnableRobot()
+    
     print("完成使能:)")
     print("循环执行...")
-    point_a = [148.021667, -325.570190, 1461.586304, -
-               87.462433, 23.257524, -114.395256]
-    point_b = [46.395420, -345.765656, 1463.996338, -
-               87.583336, 22.516230, -133.578445]
+
+    dashboard.SpeedFactor(10)
+    dashboard.SetCollisionLevel(5)
+    
+    
+
+    point_1 = [-60, 30, 486.31, 90, 0, 30]
+    point_2 = [-62, 32, 486.31, 90, 0, 30]
+    point_3 = [-60, 31, 486.31, 90, 0, 30]
+    point_4 = [-60, 30, 460, 90, 0, 30]
+    point_5 = [-60, 30, 486.31, 90, 0, 30]
+
+
+    
+
+
+
     while True:
-        RunPoint(move, point_a)
-        WaitArrive(point_a)
-        RunPoint(move, point_b)
-        WaitArrive(point_b)
+        RunPoint(move, point_4,"SpeedL=100")
+        WaitArrive(point_4)
+        RunPoint(move, point_1,"SpeedL=100")
+        WaitArrive(point_1)
+        RunCircle(move, point_2,point_3,1,"SpeedL=1","AccL=1")
+        WaitArrive(point_1)
