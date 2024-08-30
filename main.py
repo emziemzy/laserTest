@@ -140,7 +140,7 @@ def ClearRobotError(dashboard: DobotApiDashboard):
 
 
 if __name__ == '__main__':
-    IsBeaglebone = True
+    IsBeaglebone = False
     if IsBeaglebone:
         import Adafruit_BBIO.PWM as PWM
 
@@ -174,70 +174,76 @@ if __name__ == '__main__':
     ## 0.5 from each side
     point_c21 = [-60.5, 30.5, 486.31, 90, 0, 30]
     point_c22 = [-61.5, 31.5, 486.31, 90, 0, 30]
-    point_c23 = [-60.5, 30.5, 486.31, 90, 0, 30]
+    point_c23 = [-60.5, 31, 486.31, 90, 0, 30]
 
     ## 0.25 from each side
     point_c31 = [-60.75, 30.75, 486.31, 90, 0, 30]
     point_c32 = [-61.25, 31.25, 486.31, 90, 0, 30]
-    point_c33 = [-60.75, 30.75, 486.31, 90, 0, 30]
+    point_c33 = [-60.75, 31, 486.31, 90, 0, 30]
 
-      
+    point_end = [-60.5, 31, 460, 90, 0, 30]
 
 
+    runCount = 0
 
     while True:
-        
-        RunPoint(move, point_init,"SpeedL=100")
-        WaitArrive(point_init)
+        if runCount < 1:
+            RunPoint(move, point_init,"SpeedL=100")
+            WaitArrive(point_init)
 
-        ## circle 1
-        RunPoint(move, point_c11,"SpeedL=100")
-        WaitArrive(point_c11)
-        if IsBeaglebone:
-            PWM.start("P9_14",30,1000)
-        else:
-            print('PWM.start("P9_14",30,1000)')
-        
-        RunCircle(move, point_c12,point_c13,1,"SpeedL=1","AccL=1")
-        WaitArrive(point_c12)
-        WaitArrive(point_c11)
+            ## circle 1
+            RunPoint(move, point_c11,"SpeedL=100")
+            WaitArrive(point_c11)
+            if IsBeaglebone:
+                PWM.start("P9_14",30,1000)
+            else:
+                print('PWM.start("P9_14",30,1000)')
+            
+            RunCircle(move, point_c12,point_c13,1,"SpeedL=1","AccL=1")
+            WaitArrive(point_c12)
+            WaitArrive(point_c11)
 
-        if IsBeaglebone:
-            PWM.stop()
-        else:
-            print('PWM.stop()')
+            if IsBeaglebone:
+                PWM.stop()
+            else:
+                print('PWM.stop()')
 
 
-        ## circle 2
-        RunPoint(move, point_c21,"SpeedL=100")
-        WaitArrive(point_c21)
-        if IsBeaglebone:
-            PWM.start("P9_14",30,1000)
-        else:
-            print('PWM.start("P9_14",30,1000)')
-        
-        RunCircle(move, point_c22,point_c23,1,"SpeedL=1","AccL=1")
-        WaitArrive(point_c22)
-        WaitArrive(point_c21)
+            ## circle 2
+            RunPoint(move, point_c21,"SpeedL=100")
+            WaitArrive(point_c21)
+            if IsBeaglebone:
+                PWM.start("P9_14",30,1000)
+            else:
+                print('PWM.start("P9_14",30,1000)')
+            
+            RunCircle(move, point_c22,point_c23,1,"SpeedL=1","AccL=1")
+            WaitArrive(point_c22)
+            WaitArrive(point_c21)
 
-        if IsBeaglebone:
-            PWM.stop()
-        else:
-            print('PWM.stop()')
+            if IsBeaglebone:
+                PWM.stop()
+            else:
+                print('PWM.stop()')
+            
+            ## circle 3
+            """
+            RunPoint(move, point_c31,"SpeedL=100")
+            WaitArrive(point_c31)
+            
+            if IsBeaglebone:
+                PWM.start("P9_14",30,1000)
+            else:
+                print('PWM.start("P9_14",30,1000)')
+            
+            RunCircle(move, point_c32,point_c33,1,"SpeedL=1","AccL=1")
+            WaitArrive(point_c32)
+            WaitArrive(point_c31)
 
-        ## circle 3
-        RunPoint(move, point_c31,"SpeedL=100")
-        WaitArrive(point_c31)
-        if IsBeaglebone:
-            PWM.start("P9_14",30,1000)
-        else:
-            print('PWM.start("P9_14",30,1000)')
-        
-        RunCircle(move, point_c32,point_c33,1,"SpeedL=1","AccL=1")
-        WaitArrive(point_c32)
-        WaitArrive(point_c31)
-
-        if IsBeaglebone:
-            PWM.stop()
-        else:
-            print('PWM.stop()')
+            if IsBeaglebone:
+                PWM.stop()
+            else:
+                print('PWM.stop()')
+            """
+            RunPoint(move,point_end,"SpeedL=100")
+            runCount = 1
