@@ -36,6 +36,8 @@ def RunPoint(move: DobotApiMove, point_list: list,speedlparam):
 def RunCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
    move.Circle3(point_list1[0], point_list1[1], point_list1[2], point_list1[3], point_list1[4], point_list1[5],point_list2[0], point_list2[1], point_list2[2], point_list2[3], point_list2[4], point_list2[5],count,speedlparam,acclparam)     
 
+def MarkCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
+   move.Circle3(point_list1[0], point_list1[1], point_list1[2], point_list1[3], point_list1[4], point_list1[5],point_list2[0], point_list2[1], point_list2[2], point_list2[3], point_list2[4], point_list2[5],count,speedlparam,acclparam)    
 
 
 
@@ -79,6 +81,19 @@ def WaitArrive(point_list):
         globalLockValue.release()
         sleep(0.001)
 
+def MarkTilArrive(point_list):
+    while True:
+        is_arrive = True
+        globalLockValue.acquire()
+        if current_actual is not None:
+            for index in range(4):
+                if (abs(current_actual[index] - point_list[index]) > 1):
+                    is_arrive = False
+            if is_arrive:
+                globalLockValue.release()
+                return
+        globalLockValue.release()
+        sleep(0.001)
 
 def ClearRobotError(dashboard: DobotApiDashboard):
     global robotErrorState
@@ -125,6 +140,13 @@ def ClearRobotError(dashboard: DobotApiDashboard):
 
 
 if __name__ == '__main__':
+    IsBeaglebone = True
+    if IsBeaglebone:
+        import Adafruit_BBIO.PWM as PWM
+
+    else:
+        print("IsBeaglebone setting is False. The laser will not mark")
+
     dashboard, move, feed = ConnectRobot()
     feed_thread = threading.Thread(target=GetFeed, args=(feed,))
     feed_thread.daemon = True
@@ -155,9 +177,21 @@ if __name__ == '__main__':
 
 
     while True:
+        
         RunPoint(move, point_4,"SpeedL=100")
         WaitArrive(point_4)
         RunPoint(move, point_1,"SpeedL=100")
         WaitArrive(point_1)
+        if IsBeaglebone:
+            PWM.start("P9_14",30,1000)
+        else:
+            print('PWM.start("P9_14",30,1000)')
+        
+        
         RunCircle(move, point_2,point_3,1,"SpeedL=1","AccL=1")
+        WaitArrive(point_2)
         WaitArrive(point_1)
+        if IsBeaglebone:
+            PWM.stop()
+        else:
+            print('PWM.stop()')
