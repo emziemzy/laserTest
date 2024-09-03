@@ -207,6 +207,8 @@ if __name__ == '__main__':
                 PWM.stop("P9_14")
             else:
                 print('PWM.stop("P9_14")')
+
+            sleep(2)
             
             ## circle 2
             RunPoint(move, point_c21,"SpeedL=100")
