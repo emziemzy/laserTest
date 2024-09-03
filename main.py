@@ -9,6 +9,7 @@ current_actual = [-1]
 algorithm_queue = -1
 enableStatus_robot = -1
 robotErrorState = False
+isBeaglebone = False
 globalLockValue = threading.Lock()
 
 
@@ -140,12 +141,11 @@ def ClearRobotError(dashboard: DobotApiDashboard):
 
 
 if __name__ == '__main__':
-    IsBeaglebone = False
-    if IsBeaglebone:
+    if isBeaglebone:
         import Adafruit_BBIO.PWM as PWM
 
     else:
-        print("IsBeaglebone setting is False. The laser will not mark")
+        print("isBeaglebone setting is False. The laser will not mark")
 
     dashboard, move, feed = ConnectRobot()
     feed_thread = threading.Thread(target=GetFeed, args=(feed,))
@@ -194,7 +194,7 @@ if __name__ == '__main__':
             ## circle 1
             RunPoint(move, point_c11,"SpeedL=100")
             WaitArrive(point_c11)
-            if IsBeaglebone:
+            if isBeaglebone:
                 PWM.start("P9_14",30,1000)
             else:
                 print('PWM.start("P9_14",30,1000)')
@@ -203,47 +203,11 @@ if __name__ == '__main__':
             WaitArrive(point_c12)
             WaitArrive(point_c11)
 
-            if IsBeaglebone:
+            if isBeaglebone:
                 PWM.stop()
             else:
                 print('PWM.stop()')
 
-
-            ## circle 2
-            RunPoint(move, point_c21,"SpeedL=100")
-            WaitArrive(point_c21)
-            if IsBeaglebone:
-                PWM.start("P9_14",30,1000)
-            else:
-                print('PWM.start("P9_14",30,1000)')
-            
-            RunCircle(move, point_c22,point_c23,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c22)
-            WaitArrive(point_c21)
-
-            if IsBeaglebone:
-                PWM.stop()
-            else:
-                print('PWM.stop()')
-            
-            ## circle 3
-            """
-            RunPoint(move, point_c31,"SpeedL=100")
-            WaitArrive(point_c31)
-            
-            if IsBeaglebone:
-                PWM.start("P9_14",30,1000)
-            else:
-                print('PWM.start("P9_14",30,1000)')
-            
-            RunCircle(move, point_c32,point_c33,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c32)
-            WaitArrive(point_c31)
-
-            if IsBeaglebone:
-                PWM.stop()
-            else:
-                print('PWM.stop()')
-            """
             RunPoint(move,point_end,"SpeedL=100")
+            PWM.cleanup()
             runCount = 1
