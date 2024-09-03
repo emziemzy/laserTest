@@ -204,9 +204,45 @@ if __name__ == '__main__':
             WaitArrive(point_c11)
 
             if isBeaglebone:
+                PWM.stop("P9_14")
+            else:
+                print('PWM.stop("P9_14")')
+            
+            ## circle 2
+            RunPoint(move, point_c21,"SpeedL=100")
+            WaitArrive(point_c21)
+            if IsBeaglebone:
+                PWM.start("P9_14",30,1000)
+            else:
+                print('PWM.start("P9_14",30,1000)')
+
+            RunCircle(move, point_c22,point_c23,1,"SpeedL=1","AccL=1")
+            WaitArrive(point_c22)
+            WaitArrive(point_c21)
+
+            if IsBeaglebone:
+                PWM.stop("P9_14")
+            else:
+                print('PWM.stop("P9_14")')
+
+            ## circle 3
+            """
+            RunPoint(move, point_c31,"SpeedL=100")
+            WaitArrive(point_c31)
+            
+            if IsBeaglebone:
+                PWM.start("P9_14",30,1000)
+            else:
+                print('PWM.start("P9_14",30,1000)')
+            
+            RunCircle(move, point_c32,point_c33,1,"SpeedL=1","AccL=1")
+            WaitArrive(point_c32)
+            WaitArrive(point_c31)
+            if IsBeaglebone:
                 PWM.stop()
             else:
                 print('PWM.stop()')
+            """
 
             RunPoint(move,point_end,"SpeedL=100")
             PWM.cleanup()
