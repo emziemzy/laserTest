@@ -9,7 +9,7 @@ current_actual = [-1]
 algorithm_queue = -1
 enableStatus_robot = -1
 robotErrorState = False
-isBeaglebone = False
+isBeaglebone = True
 globalLockValue = threading.Lock()
 
 
