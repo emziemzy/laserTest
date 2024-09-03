@@ -31,13 +31,28 @@ def ConnectRobot():
 
 
 def RunPoint(move: DobotApiMove, point_list: list,speedlparam):
+    if isinstance(point_list, np.ndarray):
+        # print("my_array is a numpy array")
+        point_list = point_list.tolist()
+    else:
+        # print("my_array is not a numpy array")
     move.MovL(point_list[0], point_list[1], point_list[2],
               point_list[3], point_list[4], point_list[5],speedlparam)
 
 def RunCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
+    if isinstance(point_list, np.ndarray):
+        # print("my_array is a numpy array")
+        point_list = point_list.tolist()
+    else:
+        # print("my_array is not a numpy array")
    move.Circle3(point_list1[0], point_list1[1], point_list1[2], point_list1[3], point_list1[4], point_list1[5],point_list2[0], point_list2[1], point_list2[2], point_list2[3], point_list2[4], point_list2[5],count,speedlparam,acclparam)     
 
 def MarkCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
+    if isinstance(point_list, np.ndarray):
+        # print("my_array is a numpy array")
+        point_list = point_list.tolist()
+    else:
+        # print("my_array is not a numpy array")
    move.Circle3(point_list1[0], point_list1[1], point_list1[2], point_list1[3], point_list1[4], point_list1[5],point_list2[0], point_list2[1], point_list2[2], point_list2[3], point_list2[4], point_list2[5],count,speedlparam,acclparam)    
 
 
