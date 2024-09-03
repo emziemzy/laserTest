@@ -164,25 +164,28 @@ if __name__ == '__main__':
     dashboard.SetCollisionLevel(5)
     
     
-    # point_init = [-60, 30, 460, 90, 0, 30]
-    point_init = [-22, 38, 460, 90, 0, 30]
+    markingHeight = 486.31
+
+    # circle 1
+    point_c11 = np.array([-22, 38, markingHeight, 90, 0, 30])
+    point_c12 = point_c11 + [-2, 2, 0, 0, 0, 0]
+    point_c13 = point_c11 + [0, 1, 0, 0, 0, 0]
     
-    point_c11 = [-22, 38, 486.31, 90, 0, 30]
-    point_c12 = [-24, 40, 486.31, 90, 0, 30]
-    point_c13 = [-22, 39, 486.31, 90, 0, 30]
-
-
+    
     ## 0.5 from each side
-    point_c21 = [-22.5, 38.5, 486.31, 90, 0, 30]
-    point_c22 = [-23.5, 39.5, 486.31, 90, 0, 30]
-    point_c23 = [-22.5, 38, 486.31, 90, 0, 30]
-
+    point_c21 = np.array([-22.5, 38.5, markingHeight, 90, 0, 30])
+    point_c22 = point_c21 + [-1, 1, 0, 0, 0, 0]
+    point_c23 = point_c21 + [0, 0.5, 0, 0, 0, 0]
+    
+    
     ## 0.25 from each side
-    point_c31 = [-22.75, 38.75, 486.31, 90, 0, 30]
-    point_c32 = [-23.25, 39.25, 486.31, 90, 0, 30]
-    point_c33 = [-22.75, 39, 486.31, 90, 0, 30]
-
-    point_end = [-22.5, 39, 460, 90, 0, 30]
+    point_c31 = np.array([-22.75, 38.75, markingHeight, 90, 0, 30])
+    point_c32 = point_c31 + [-0.5, 0.5, 0, 0, 0, 0]
+    point_c33 = point_c31 + [0, 0.25, 0, 0, 0, 0]
+    
+    
+    point_init = point_c11 + [0, 0, markingHeight - 26, 0, 0, 0]
+    point_end = point_c31 + [0, 0, markingHeight - 26, 0, 0, 0]
 
 
     runCount = 0
