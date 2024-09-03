@@ -36,8 +36,7 @@ def RunPoint(move: DobotApiMove, point_list: list,speedlparam):
         point_list = point_list.tolist()
     else:
         print("my_array is not a numpy array")
-    move.MovL(point_list[0], point_list[1], point_list[2],
-              point_list[3], point_list[4], point_list[5],speedlparam)
+    move.MovL(point_list[0], point_list[1], point_list[2], point_list[3], point_list[4], point_list[5],speedlparam)
 
 def RunCircle(move: DobotApiMove, point_list1: list, point_list2: list, count,speedlparam,acclparam):
     if isinstance(point_list, np.ndarray):
