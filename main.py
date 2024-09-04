@@ -205,7 +205,7 @@ if __name__ == '__main__':
                 point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
                 point_c3 = point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]
 
-                RunPoint(move, point_c1,"SpeedL=1")
+                RunPoint(move, point_c1,"SpeedL=100")
                 WaitArrive(point_c1)
                 if isBeaglebone:
                     PWM.start("P9_14",30,1000)
@@ -215,13 +215,14 @@ if __name__ == '__main__':
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 WaitArrive(point_c3)
                 WaitArrive(point_c1)
+                RunPoint(move, point_c1,"SpeedL=1")
                 sleep(0.5)
     
                 if isBeaglebone:
                     PWM.stop("P9_14")
                 else:
                     print('PWM.stop("P9_14")')
-    
+                
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
                 sleep(2)
             
