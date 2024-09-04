@@ -219,12 +219,14 @@ if __name__ == '__main__':
 
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
                 
-            
+            point_end = point_c1 + [0,0,-26,0,0,0]
             if isBeaglebone:
                 PWM.stop("P9_14")
                 print("Laser stopping")
             else:
                 print('PWM.stop("P9_14")')
+
+            
             RunPoint(move,point_init,"SpeedL=100")
             WaitArrive(point_init)
             
