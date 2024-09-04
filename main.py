@@ -198,11 +198,6 @@ if __name__ == '__main__':
             WaitArrive(point_init)
 
             radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-                print("Laser on")
-            else:
-                print('PWM.start("P9_14",30,1000)')
                     
             while radiusCurrent > 0.3: #distanceBetweenInnerCircles:
                 # Update point values
@@ -213,6 +208,11 @@ if __name__ == '__main__':
                 RunPoint(move, point_c1,"SpeedL=100")
                 WaitArrive(point_c1)
                 
+                if isBeaglebone:
+                    PWM.start("P9_14",30,1000)
+                    print("Laser on")
+                else:
+                    print('PWM.start("P9_14",30,1000)')
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 WaitArrive(point_c3)
