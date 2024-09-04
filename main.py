@@ -204,7 +204,7 @@ if __name__ == '__main__':
             else:
                 print('PWM.start("P9_14",30,1000)')
                     
-            while radiusCurrent > 0.4: #distanceBetweenInnerCircles:
+            while radiusCurrent > 0.3: #distanceBetweenInnerCircles:
                 # Update point values
                 point_c1 = np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
                 point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
@@ -219,13 +219,15 @@ if __name__ == '__main__':
                 WaitArrive(point_c1)
                 # RunPoint(move, point_c1,"SpeedL=100")
 
+                if isBeaglebone:
+                    PWM.stop("P9_14")
+                    print("Laser stopping")
+                else:
+                    print('PWM.stop("P9_14")')    
+
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
                 
-            if isBeaglebone:
-                PWM.stop("P9_14")
-                print("Laser stopping")
-            else:
-                print('PWM.stop("P9_14")')    
+            
             point_end = point_c1 + [0,0,-26,0,0,0]
             
 
