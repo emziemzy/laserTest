@@ -185,19 +185,19 @@ if __name__ == '__main__':
     markingHeight = 486.31
 
     # circle 1
-    point_c11 = np.array([-22, 38, markingHeight, 90, 0, 30])
+    point_c11 = np.array([-22, 20, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
     point_c12 = point_c11 + [-2, 2, 0, 0, 0, 0]
     point_c13 = point_c11 + [0, 1, 0, 0, 0, 0]
     
     
     ## 0.5 from each side
-    point_c21 = np.array([-22.5, 38.5, markingHeight, 90, 0, 30])
+    point_c21 = point_c11 + [-0.5, 0.5, 0, 0, 0, 0]
     point_c22 = point_c21 + [-1, 1, 0, 0, 0, 0]
     point_c23 = point_c21 + [0, 0.5, 0, 0, 0, 0]
     
     
     ## 0.25 from each side
-    point_c31 = np.array([-22.75, 38.75, markingHeight, 90, 0, 30])
+    point_c31 = point_c11 + [-0.75, 0.75, 0, 0, 0, 0]
     point_c32 = point_c31 + [-0.5, 0.5, 0, 0, 0, 0]
     point_c33 = point_c31 + [0, 0.25, 0, 0, 0, 0]
     
