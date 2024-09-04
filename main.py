@@ -203,6 +203,7 @@ if __name__ == '__main__':
     circleCentreY = 50
     radiusOuterCircle = 0.5 # mm
     distanceBetweenInnerCircles = 0.1 # mm
+    roundDP = 4
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
 
@@ -214,11 +215,12 @@ if __name__ == '__main__':
 
             radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
                     
-            while radiusCurrent > 0.3: #distanceBetweenInnerCircles:
+            while radiusCurrent > distanceBetweenInnerCircles:
                 # Update point values
-                point_c1 = np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
-                point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
-                point_c3 = point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]
+                point_c1 = np.round(np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30]),decimals=roundDP)
+                point_c2 = np.round(point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0],decimals=roundDP)
+                point_c3 = np.round(point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0],decimals=roundDP)
+                
                 print("point_c1:", point_c1)
                 print("point_c2:", point_c2)
                 print("point_c3:", point_c3)
