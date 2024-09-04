@@ -184,10 +184,10 @@ if __name__ == '__main__':
     # circle marking parameters
     markingHeight = 486.31
     aboveMarkingHeight = markingHeight -26
-    circleCentreX = -50
+    circleCentreX = -30
     circleCentreY = 50
     radiusOuterCircle = 2 # mm
-    distanceBetweenInnerCircles = 0.2 # mm
+    distanceBetweenInnerCircles = 0.1 # mm
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
 
