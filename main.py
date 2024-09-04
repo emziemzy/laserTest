@@ -186,7 +186,7 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -26
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 2 # mm
+    radiusOuterCircle = 0.5 # mm
     distanceBetweenInnerCircles = 0.1 # mm
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
@@ -204,6 +204,9 @@ if __name__ == '__main__':
                 point_c1 = np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
                 point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
                 point_c3 = point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]
+                print("point_c1:", point_c1)
+                print("point_c2:", point_c2)
+                print("point_c3:", point_c3)
 
                 RunPoint(move, point_c1,"SpeedL=100")
                 WaitArrive(point_c1)
