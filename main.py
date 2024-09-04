@@ -199,10 +199,10 @@ if __name__ == '__main__':
 
             radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
             if isBeaglebone:
-                    PWM.start("P9_14",30,1000)
-                    print("Laser on")
-                else:
-                    print('PWM.start("P9_14",30,1000)')
+                PWM.start("P9_14",30,1000)
+                print("Laser on")
+            else:
+                print('PWM.start("P9_14",30,1000)')
                     
             while radiusCurrent > 0.4: #distanceBetweenInnerCircles:
                 # Update point values
