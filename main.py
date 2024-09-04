@@ -87,6 +87,11 @@ def GetFeed(feed: DobotApi):
 
 
 def WaitArrive(point_list):
+    if isinstance(point_list, np.ndarray):
+        # print("my_array is a numpy array")
+        point_list = point_list.tolist()
+    else:
+        print("my_array is not a numpy array")
     while True:
         is_arrive = True
         globalLockValue.acquire()
@@ -101,6 +106,11 @@ def WaitArrive(point_list):
         sleep(0.001)
 
 def MarkTilArrive(point_list):
+    if isinstance(point_list, np.ndarray):
+        # print("my_array is a numpy array")
+        point_list = point_list.tolist()
+    else:
+        print("my_array is not a numpy array")
     while True:
         is_arrive = True
         globalLockValue.acquire()
