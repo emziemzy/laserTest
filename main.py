@@ -190,7 +190,6 @@ if __name__ == '__main__':
     distanceBetweenInnerCircles = 0.2 # mm
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
-    point_end = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
 
     runCount = 0
     while True:
@@ -209,20 +208,24 @@ if __name__ == '__main__':
                 WaitArrive(point_c1)
                 if isBeaglebone:
                     PWM.start("P9_14",30,1000)
+                    print("Laser on")
                 else:
                     print('PWM.start("P9_14",30,1000)')
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 WaitArrive(point_c3)
                 WaitArrive(point_c1)
-                RunPoint(move, point_c1,"SpeedL=100")
+                # RunPoint(move, point_c1,"SpeedL=100")
 
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
+                
             
             if isBeaglebone:
                 PWM.stop("P9_14")
+                print("Laser stopping")
             else:
                 print('PWM.stop("P9_14")')
+            point_end = point_c1 + [0,0,-26,0,0,0]
             RunPoint(move,point_end,"SpeedL=100")
             
             PWM.cleanup()
