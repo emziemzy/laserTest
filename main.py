@@ -183,91 +183,44 @@ if __name__ == '__main__':
     
     
     markingHeight = 486.31
+    aboveMarkingHeight = markingHeight -26
 
-    # circle 1
-    point_c11 = np.array([-22, 20, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
-    point_c12 = point_c11 + [-2, 2, 0, 0, 0, 0]
-    point_c13 = point_c11 + [0, 1, 0, 0, 0, 0]
-    
-    
-    ## 0.5 from each side
-    point_c21 = point_c11 + [-0.5, 0.5, 0, 0, 0, 0]
-    point_c22 = point_c21 + [-1, 1, 0, 0, 0, 0]
-    point_c23 = point_c21 + [0, 0.5, 0, 0, 0, 0]
-    
-    
-    ## 0.25 from each side
-    point_c31 = point_c11 + [-0.75, 0.75, 0, 0, 0, 0]
-    point_c32 = point_c31 + [-0.5, 0.5, 0, 0, 0, 0]
-    point_c33 = point_c31 + [0, 0.25, 0, 0, 0, 0]
-    
-    
-    point_init = point_c11 + [0, 0, - 26, 0, 0, 0]
-    point_end = point_c31 + [0, 0, - 26, 0, 0, 0]
-
+    point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
+    point_end = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
 
     runCount = 0
-
     while True:
         if runCount < 1:
             RunPoint(move, point_init,"SpeedL=100")
             WaitArrive(point_init)
 
-            ## circle 1
-            RunPoint(move, point_c11,"SpeedL=100")
-            WaitArrive(point_c11)
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-            else:
-                print('PWM.start("P9_14",30,1000)')
+            radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
+            while radiusCurrent > distanceBetweenInnerCircles:
+                # Update point values
+                point_c1 = np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]) # np.array([-22, 38, markingHeight, 90, 0, 30])
+                point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
+                point_c3 = point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]
+
+                RunPoint(move, point_c1,"SpeedL=100")
+                WaitArrive(point_c1)
+                if isBeaglebone:
+                    PWM.start("P9_14",30,1000)
+                else:
+                    print('PWM.start("P9_14",30,1000)')
+                
+                RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
+                WaitArrive(point_c2)
+                WaitArrive(point_c1)
+    
+                if isBeaglebone:
+                    PWM.stop("P9_14")
+                else:
+                    print('PWM.stop("P9_14")')
+    
+                radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
+                sleep(2)
             
-            RunCircle(move, point_c12,point_c13,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c12)
-            WaitArrive(point_c11)
-
-            if isBeaglebone:
-                PWM.stop("P9_14")
-            else:
-                print('PWM.stop("P9_14")')
-
-            sleep(2)
-            
-            ## circle 2
-            RunPoint(move, point_c21,"SpeedL=100")
-            WaitArrive(point_c21)
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-            else:
-                print('PWM.start("P9_14",30,1000)')
-
-            RunCircle(move, point_c22,point_c23,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c22)
-            WaitArrive(point_c21)
-
-            if isBeaglebone:
-                PWM.stop("P9_14")
-            else:
-                print('PWM.stop("P9_14")')
-
-            ## circle 3
-            """
-            RunPoint(move, point_c31,"SpeedL=100")
-            WaitArrive(point_c31)
-            
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-            else:
-                print('PWM.start("P9_14",30,1000)')
-            
-            RunCircle(move, point_c32,point_c33,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c32)
-            WaitArrive(point_c31)
-            if isBeaglebone:
-                PWM.stop()
-            else:
-                print('PWM.stop()')
-            """
-
             RunPoint(move,point_end,"SpeedL=100")
+            
             PWM.cleanup()
-            runCount = 2
+            runCount += 1
