@@ -225,8 +225,8 @@ if __name__ == '__main__':
                 print("Laser stopping")
             else:
                 print('PWM.stop("P9_14")')
-            point_end = point_c1 + [0,0,-26,0,0,0]
-            RunPoint(move,point_end,"SpeedL=100")
+            RunPoint(move,point_init,"SpeedL=100")
+            WaitArrive(point_init)
             
             PWM.cleanup()
             runCount += 1
