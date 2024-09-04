@@ -186,8 +186,8 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -26
     circleCentreX = -40
     circleCentreY = 50
-    radiusOuterCircle = 5 # mm
-    distanceBetweenInnerCircles = 0.5 # mm
+    radiusOuterCircle = 1 # mm
+    distanceBetweenInnerCircles = 0.1 # mm
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
     point_end = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
@@ -215,17 +215,14 @@ if __name__ == '__main__':
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 WaitArrive(point_c3)
                 WaitArrive(point_c1)
-                RunPoint(move, point_c1,"SpeedL=1")
-                sleep(0.5)
-    
-                if isBeaglebone:
-                    PWM.stop("P9_14")
-                else:
-                    print('PWM.stop("P9_14")')
-                
+                RunPoint(move, point_c1,"SpeedL=100")
+
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
-                sleep(2)
             
+            if isBeaglebone:
+                PWM.stop("P9_14")
+            else:
+                print('PWM.stop("P9_14")')
             RunPoint(move,point_end,"SpeedL=100")
             
             PWM.cleanup()
