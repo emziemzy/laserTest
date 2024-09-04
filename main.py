@@ -184,8 +184,8 @@ if __name__ == '__main__':
     # circle marking parameters
     markingHeight = 486.31
     aboveMarkingHeight = markingHeight -26
-    circleCentreX = -22
-    circleCentreY = 20
+    circleCentreX = -40
+    circleCentreY = 50
     radiusOuterCircle = 5 # mm
     distanceBetweenInnerCircles = 1 # mm
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
                 point_c2 = point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]
                 point_c3 = point_c1 + [2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]
 
-                RunPoint(move, point_c1,"SpeedL=100")
+                RunPoint(move, point_c1,"SpeedL=1")
                 WaitArrive(point_c1)
                 if isBeaglebone:
                     PWM.start("P9_14",30,1000)
@@ -213,7 +213,7 @@ if __name__ == '__main__':
                     print('PWM.start("P9_14",30,1000)')
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-                WaitArrive(point_c2)
+                WaitArrive(point_c3)
                 WaitArrive(point_c1)
     
                 if isBeaglebone:
