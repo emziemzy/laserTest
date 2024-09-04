@@ -181,9 +181,13 @@ if __name__ == '__main__':
     dashboard.SpeedFactor(10)
     dashboard.SetCollisionLevel(5)
     
-    
+    # circle marking parameters
     markingHeight = 486.31
     aboveMarkingHeight = markingHeight -26
+    circleCentreX = -22
+    circleCentreY = 20
+    radiusOuterCircle = 5 # mm
+    distanceBetweenInnerCircles = 1 # mm
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
     point_end = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
