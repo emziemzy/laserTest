@@ -100,6 +100,7 @@ def WaitArrive(point_list):
         is_arrive = True
         globalLockValue.acquire()
         if current_actual is not None:
+            print(abs(current_actual[index] - point_list[index]) > 1)
             for index in range(4):
                 if (abs(current_actual[index] - point_list[index]) > 1):
                     is_arrive = False
