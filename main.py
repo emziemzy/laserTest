@@ -10,6 +10,7 @@ algorithm_queue = -1
 enableStatus_robot = -1
 robotErrorState = False
 isBeaglebone = True
+laserOn = False
 globalLockValue = threading.Lock()
 
 
@@ -119,11 +120,12 @@ def MarkTilArrive(point_list,continueMarking=False):
 
     # Start marking
     if not continueMarking:
-        if isBeaglebone:
-            PWM.start("P9_14",30,1000)
-            print("Laser on")
-        else:
-            print('PWM.start("P9_14",30,1000)')
+        if not laserOn:
+            if isBeaglebone:
+                PWM.start("P9_14",30,1000)
+                print("Laser on")
+            else:
+                print('PWM.start("P9_14",30,1000)')
     
     while True:
         is_arrive = True
@@ -259,7 +261,13 @@ if __name__ == '__main__':
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 #MarkTilArrive(point_c3,True)
                 MarkTilArrive(point_c1)
-                #RunPoint(move, point_c1,"SpeedL=100")   
+                #RunPoint(move, point_c1,"SpeedL=100")
+                if laserOn:
+                    if isBeaglebone:
+                        PWM.stop("P9_14")
+                        print("Laser stopping")
+                    else:
+                        print('PWM.stop("P9_14")') 
         
                 radiusCurrent = round(radiusCurrent+distanceBetweenInnerCircles,roundDP)
         
