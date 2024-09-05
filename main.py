@@ -101,7 +101,6 @@ def WaitArrive(point_list):
         globalLockValue.acquire()
         if current_actual is not None:
             for index in range(4):
-                print(abs(current_actual[index] - point_list[index]) > 1)
                 if (abs(current_actual[index] - point_list[index]) > 1):
                     is_arrive = False
             if is_arrive:
@@ -202,9 +201,9 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -26
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 0.5 # mm
+    radiusOuterCircle = 0.3 # mm
     distanceBetweenInnerCircles = 0.1 # mm
-    roundDP = 4
+    roundDP = 3
 
     point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
 
