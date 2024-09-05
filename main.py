@@ -213,8 +213,7 @@ if __name__ == '__main__':
             RunPoint(move, point_init,"SpeedL=100")
             WaitArrive(point_init)
 
-            radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
-                    
+            radiusCurrent = radiusOuterCircle                    
             while (radiusCurrent > (2*distanceBetweenInnerCircles)) or (radiusCurrent > 0.2):
                 print("radiusCurrent: ", radiusCurrent)
                 print("distanceBetweenInnerCircles: ", distanceBetweenInnerCircles)
