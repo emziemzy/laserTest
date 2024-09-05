@@ -219,10 +219,10 @@ if __name__ == '__main__':
             WaitArrive(point_c)
 
             if isBeaglebone:
-                    PWM.start("P9_14",30,1000)
-                    print("Laser on")
-                else:
-                    print('PWM.start("P9_14",30,1000)')
+                PWM.start("P9_14",30,1000)
+                print("Laser on")
+            else:
+                print('PWM.start("P9_14",30,1000)')
 
             radiusCurrent = radiusInnerCircle
             while (radiusCurrent < radiusOuterCircle):
