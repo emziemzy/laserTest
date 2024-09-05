@@ -118,11 +118,12 @@ def MarkTilArrive(point_list,continueMarking=False):
         print("my_array is not a numpy array")
 
     # Start marking
-    if isBeaglebone:
-        PWM.start("P9_14",30,1000)
-        print("Laser on")
-    else:
-        print('PWM.start("P9_14",30,1000)')
+    if not continueMarking:
+        if isBeaglebone:
+            PWM.start("P9_14",30,1000)
+            print("Laser on")
+        else:
+            print('PWM.start("P9_14",30,1000)')
     
     while True:
         is_arrive = True
