@@ -247,7 +247,7 @@ if __name__ == '__main__':
                 else:
                     print('PWM.stop("P9_14")')    
 
-                radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
+                radiusCurrent = round(radiusCurrent-distanceBetweenInnerCircles,roundDP)
                 
             
             point_end = np.round(np.array(point_c1 + [0,0,-26,0,0,0]),decimals=roundDP)
