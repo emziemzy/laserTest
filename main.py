@@ -229,9 +229,9 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 4 # mm
-    radiusInnerCircle = 1
-    distanceBetweenInnerCircles = 0.5 # mm
+    radiusOuterCircle = 1.2 # mm
+    radiusInnerCircle = 0.6
+    distanceBetweenInnerCircles = 0.1 # mm
     roundDP = 3
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
