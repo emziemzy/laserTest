@@ -197,7 +197,7 @@ if __name__ == '__main__':
     dashboard.SetCollisionLevel(5)
 
     # circle marking parameters
-    markingHeight = 486
+    markingHeight = 480
     aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
@@ -218,6 +218,12 @@ if __name__ == '__main__':
             RunPoint(move, point_c,"SpeedL=100")
             WaitArrive(point_c)
 
+            if isBeaglebone:
+                    PWM.start("P9_14",30,1000)
+                    print("Laser on")
+                else:
+                    print('PWM.start("P9_14",30,1000)')
+
             radiusCurrent = radiusInnerCircle
             while (radiusCurrent < radiusOuterCircle):
                 print("radiusCurrent: ", radiusCurrent)
@@ -230,21 +236,21 @@ if __name__ == '__main__':
                 print("point_c1:", point_c1)
                 print("point_c2:", point_c2)
                 print("point_c3:", point_c3)
+        
+                RunPoint(move, point_c1,"SpeedL=1")
+                WaitArrive(point_c1)
 
                 if isBeaglebone:
                     PWM.start("P9_14",30,1000)
                     print("Laser on")
                 else:
                     print('PWM.start("P9_14",30,1000)')
-        
-                RunPoint(move, point_c1,"SpeedL=1")
-                WaitArrive(point_c1)
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 WaitArrive(point_c3)
                 WaitArrive(point_c1)
-                RunPoint(move, point_c1,"SpeedL=100")
-        
+                #RunPoint(move, point_c1,"SpeedL=100")
+                sleep(0.001)
                 if isBeaglebone:
                     PWM.stop("P9_14")
                     print("Laser stopping")
