@@ -215,7 +215,7 @@ if __name__ == '__main__':
 
             radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
                     
-            while radiusCurrent > (2*distanceBetweenInnerCircles):
+            while (radiusCurrent > (2*distanceBetweenInnerCircles)) or (radiusCurrent > 0.2):
                 print("radiusCurrent: ", radiusCurrent)
                 print("distanceBetweenInnerCircles: ", distanceBetweenInnerCircles)
                 # Update point values
