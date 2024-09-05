@@ -197,11 +197,11 @@ if __name__ == '__main__':
     dashboard.SetCollisionLevel(5)
     
     # circle marking parameters
-    markingHeight = 486.31
-    aboveMarkingHeight = markingHeight -26
+    markingHeight = 500
+    aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 10 # mm
+    radiusOuterCircle = 4 # mm
     radiusInnerCircle = 0.5
     distanceBetweenInnerCircles = 0.5 # mm
     roundDP = 3
@@ -281,7 +281,7 @@ if __name__ == '__main__':
             else:
                 print('PWM.stop("P9_14")') 
                     
-            point_end = np.round(np.array(point_c1 + [0,0,-26,0,0,0]),decimals=roundDP)
+            point_end = np.round(np.array(point_c1 + [0,0,-50,0,0,0]),decimals=roundDP)
             
 
             
