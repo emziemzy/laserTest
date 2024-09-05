@@ -116,6 +116,14 @@ def MarkTilArrive(point_list):
         point_list = point_list.tolist()
     else:
         print("my_array is not a numpy array")
+
+    # Start marking
+    if isBeaglebone:
+        PWM.start("P9_14",30,1000)
+        print("Laser on")
+    else:
+        print('PWM.start("P9_14",30,1000)')
+    
     while True:
         is_arrive = True
         globalLockValue.acquire()
@@ -125,6 +133,12 @@ def MarkTilArrive(point_list):
                     is_arrive = False
             if is_arrive:
                 globalLockValue.release()
+                # stop marking once arrived
+                if isBeaglebone:
+                    PWM.stop("P9_14")
+                    print("Laser stopping")
+                else:
+                    print('PWM.stop("P9_14")') 
                 return
         globalLockValue.release()
         sleep(0.001)
@@ -218,12 +232,6 @@ if __name__ == '__main__':
             RunPoint(move, point_c,"SpeedL=100")
             WaitArrive(point_c)
 
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-                print("Laser on")
-            else:
-                print('PWM.start("P9_14",30,1000)')
-
             radiusCurrent = radiusInnerCircle
             while (radiusCurrent < radiusOuterCircle):
                 print("radiusCurrent: ", radiusCurrent)
@@ -238,24 +246,12 @@ if __name__ == '__main__':
                 print("point_c3:", point_c3)
         
                 RunPoint(move, point_c1,"SpeedL=1")
-                WaitArrive(point_c1)
-
-                if isBeaglebone:
-                    PWM.start("P9_14",30,1000)
-                    print("Laser on")
-                else:
-                    print('PWM.start("P9_14",30,1000)')
+                MarkTilArrive(point_c1)
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-                WaitArrive(point_c3)
-                WaitArrive(point_c1)
-                #RunPoint(move, point_c1,"SpeedL=100")
-                sleep(0.001)
-                if isBeaglebone:
-                    PWM.stop("P9_14")
-                    print("Laser stopping")
-                else:
-                    print('PWM.stop("P9_14")')    
+                MarkTilArrive(point_c3)
+                MarkTilArrive(point_c1)
+                #RunPoint(move, point_c1,"SpeedL=100")   
         
                 radiusCurrent = round(radiusCurrent+distanceBetweenInnerCircles,roundDP)
         
@@ -274,15 +270,10 @@ if __name__ == '__main__':
             RunPoint(move, point_c1,"SpeedL=100")
             WaitArrive(point_c1)
                 
-            if isBeaglebone:
-                PWM.start("P9_14",30,1000)
-                print("Laser on")
-            else:
-                print('PWM.start("P9_14",30,1000)')
                 
             RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-            WaitArrive(point_c3)
-            WaitArrive(point_c1)
+            MarkTilArrive(point_c3)
+            MarkTilArrive(point_c1)
             RunPoint(move, point_c1,"SpeedL=100")
         
             if isBeaglebone:
