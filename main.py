@@ -109,7 +109,7 @@ def WaitArrive(point_list):
         globalLockValue.release()
         sleep(0.001)
 
-def MarkTilArrive(point_list):
+def MarkTilArrive(point_list,continue=false):
     print("MarkTilArrive function")
     if isinstance(point_list, np.ndarray):
         # print("my_array is a numpy array")
@@ -134,11 +134,12 @@ def MarkTilArrive(point_list):
             if is_arrive:
                 globalLockValue.release()
                 # stop marking once arrived
-                if isBeaglebone:
-                    PWM.stop("P9_14")
-                    print("Laser stopping")
-                else:
-                    print('PWM.stop("P9_14")') 
+                if continue=true:
+                    if isBeaglebone:
+                        PWM.stop("P9_14")
+                        print("Laser stopping")
+                    else:
+                        print('PWM.stop("P9_14")')
                 return
         globalLockValue.release()
         sleep(0.001)
@@ -246,10 +247,10 @@ if __name__ == '__main__':
                 print("point_c3:", point_c3)
         
                 RunPoint(move, point_c1,"SpeedL=1")
-                MarkTilArrive(point_c1)
+                WaitArrive(point_c1)
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-                MarkTilArrive(point_c3)
+                MarkTilArrive(point_c3,continue=true)
                 MarkTilArrive(point_c1)
                 #RunPoint(move, point_c1,"SpeedL=100")   
         
