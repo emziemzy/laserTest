@@ -134,7 +134,7 @@ def MarkTilArrive(point_list,continueMarking=False):
             if is_arrive:
                 globalLockValue.release()
                 # stop marking once arrived
-                if continueMarking=True:
+                if continueMarking:
                     if isBeaglebone:
                         PWM.stop("P9_14")
                         print("Laser stopping")
