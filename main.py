@@ -124,6 +124,7 @@ def MarkTilArrive(point_list,continueMarking=False):
             if isBeaglebone:
                 PWM.start("P9_14",30,1000)
                 print("Laser on")
+                laserOn = True
             else:
                 print('PWM.start("P9_14",30,1000)')
     
@@ -139,6 +140,7 @@ def MarkTilArrive(point_list,continueMarking=False):
                     if isBeaglebone:
                         PWM.stop("P9_14")
                         print("Laser stopping")
+                        laserOn = False
                     else:
                         print('PWM.stop("P9_14")')
                 globalLockValue.release()
@@ -148,6 +150,7 @@ def MarkTilArrive(point_list,continueMarking=False):
             if isBeaglebone:
                 PWM.stop("P9_14")
                 print("Laser stopping")
+                laserOn = False
             else:
                 print('PWM.stop("P9_14")')
         globalLockValue.release()
@@ -268,6 +271,7 @@ if __name__ == '__main__':
                     if isBeaglebone:
                         PWM.stop("P9_14")
                         print("Laser stopping")
+                        laserOn = False
                     else:
                         print('PWM.stop("P9_14")') 
         
@@ -297,6 +301,7 @@ if __name__ == '__main__':
             if isBeaglebone:
                 PWM.stop("P9_14")
                 print("Laser stopping")
+                laserOn = False
             else:
                 print('PWM.stop("P9_14")') 
                     
