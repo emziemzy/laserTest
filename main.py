@@ -10,7 +10,7 @@ algorithm_queue = -1
 enableStatus_robot = -1
 robotErrorState = False
 isBeaglebone = True
-laserOn = False
+global laserOn = False
 globalLockValue = threading.Lock()
 
 
