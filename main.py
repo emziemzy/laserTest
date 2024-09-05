@@ -133,14 +133,14 @@ def MarkTilArrive(point_list,continueMarking=False):
                 if (abs(current_actual[index] - point_list[index]) > 1):
                     is_arrive = False
             if is_arrive:
-                globalLockValue.release()
-                # stop marking once arrived
                 if continueMarking:
                     if isBeaglebone:
                         PWM.stop("P9_14")
                         print("Laser stopping")
                     else:
                         print('PWM.stop("P9_14")')
+                globalLockValue.release()
+                # stop marking once arrived
                 return
         globalLockValue.release()
         sleep(0.001)
@@ -251,7 +251,7 @@ if __name__ == '__main__':
                 WaitArrive(point_c1)
                 
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-                MarkTilArrive(point_c3,True)
+                #MarkTilArrive(point_c3,True)
                 MarkTilArrive(point_c1)
                 #RunPoint(move, point_c1,"SpeedL=100")   
         
