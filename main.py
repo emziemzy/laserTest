@@ -258,9 +258,10 @@ if __name__ == '__main__':
                 print("point_c1:", point_c1)
                 print("point_c2:", point_c2)
                 print("point_c3:", point_c3)
-
+            
                 RunPoint(move, point_c1,"SpeedL=1")
-                WaitArrive(point_c1)                
+                WaitArrive(point_c1)
+                move.Sync()
                 RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 #MarkTilArrive(point_c3,True)
                 MarkTilArrive(point_c1)
