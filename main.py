@@ -215,7 +215,7 @@ if __name__ == '__main__':
 
             radiusCurrent = radiusOuterCircle + distanceBetweenInnerCircles
                     
-            while radiusCurrent > distanceBetweenInnerCircles:
+            while radiusCurrent > (2*distanceBetweenInnerCircles):
                 # Update point values
                 point_c1 = np.round(np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]),decimals=roundDP)
                 point_c2 = np.round(point_c1 + [radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0],decimals=roundDP)
