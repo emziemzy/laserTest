@@ -10,7 +10,7 @@ algorithm_queue = -1
 enableStatus_robot = -1
 robotErrorState = False
 isBeaglebone = True
-global laserOn = False
+laserOn = False
 globalLockValue = threading.Lock()
 
 
@@ -111,6 +111,7 @@ def WaitArrive(point_list):
         sleep(0.001)
 
 def MarkTilArrive(point_list,continueMarking=False):
+    global laserOn
     print("MarkTilArrive function")
     if isinstance(point_list, np.ndarray):
         # print("my_array is a numpy array")
