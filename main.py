@@ -205,7 +205,7 @@ if __name__ == '__main__':
     distanceBetweenInnerCircles = 0.1 # mm
     roundDP = 3
 
-    point_init = [circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]
+    point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
 
     runCount = 0
     while True:
@@ -248,7 +248,7 @@ if __name__ == '__main__':
                 radiusCurrent = radiusCurrent-distanceBetweenInnerCircles
                 
             
-            point_end = point_c1 + [0,0,-26,0,0,0]
+            point_end = np.round(np.array(point_c1 + [0,0,-26,0,0,0]),decimals=roundDP)
             
 
             
