@@ -232,14 +232,14 @@ if __name__ == '__main__':
     radiusOuterCircle = 2 # mm
     radiusInnerCircle = 0.5
     distanceBetweenInnerCircles = 0.1 # mm
-    markingCount = 5
+    markingCount = 1
     roundDP = 3
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
 
     runCount = 0
     while True:
-        if runCount < 1:
+        if runCount < markingCount:
             RunPoint(move, point_init,"SpeedL=100")
             WaitArrive(point_init)
 
@@ -263,7 +263,7 @@ if __name__ == '__main__':
                 RunPoint(move, point_c1,"SpeedL=1")
                 WaitArrive(point_c1)
                 move.Sync()
-                RunCircle(move, point_c2,point_c3,markingCount,"SpeedL=1","AccL=1")
+                RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
                 #MarkTilArrive(point_c3,True)
                 move.Sync()
                 MarkTilArrive(point_c1)
@@ -296,28 +296,32 @@ if __name__ == '__main__':
             #print(2*radiusOuterCircle)
             print("point_c3:", point_c3)
             
-            RunPoint(move, point_c1,"SpeedL=100")
+            RunPoint(move, point_c1,"SpeedL=1")
             WaitArrive(point_c1)
-                
-                
-            RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
-            MarkTilArrive(point_c3)
+            move.Sync()
+            RunCircle(move, point_c2,point_c3,markingCount,"SpeedL=1","AccL=1")
+            #MarkTilArrive(point_c3,True)
+            move.Sync()
             MarkTilArrive(point_c1)
-            RunPoint(move, point_c1,"SpeedL=100")
-        
-            if isBeaglebone:
-                PWM.stop("P9_14")
-                print("Laser stopping")
-                laserOn = False
-            else:
-                print('PWM.stop("P9_14")') 
+            #compensating
+            RunPoint(move, point_c1,"SpeedL=1")
+            WaitArrive(point_c1)
+            
+            move.Sync()
+            #RunPoint(move, point_c1,"SpeedL=100")
+            if laserOn:
+                if isBeaglebone:
+                    PWM.stop("P9_14")
+                    print("Laser stopping")
+                    laserOn = False
+                else:
+                    print('PWM.stop("P9_14")') 
+            move.Sync()
                     
             point_end = np.round(np.array(point_c1 + [0,0,-50,0,0,0]),decimals=roundDP)
-            
-
             
             RunPoint(move,point_init,"SpeedL=100")
             WaitArrive(point_init)
             
-            PWM.cleanup()
             runCount += 1
+        PWM.cleanup()
