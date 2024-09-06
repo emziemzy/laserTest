@@ -254,21 +254,25 @@ if __name__ == '__main__':
             
             if fillInCircle:
                 for i in range(len(filledInArray)):
+                    point = point_c - filledInArray[i]
                     if (i%2) == 2:
-                        RunPoint(move, point_c - filledInArray[i],"SpeedL=1")
-                        WaitArrive(point_c)
+                        RunPoint(move, point,"SpeedL=1")
+                        WaitArrive(point)
                         move.Sync()
                     else:
-                        RunPoint(move, point_c - filledInArray[i],"SpeedL=1")
-                        MarkTilArrive(point_c)
+                        
+                        RunPoint(move, point,"SpeedL=1")
+                        MarkTilArrive(point)
                         move.Sync()
+                        
                         if laserOn:
                             if isBeaglebone:
                                 PWM.stop("P9_14")
                                 print("Laser stopping")
                                 laserOn = False
                             else:
-                                print('PWM.stop("P9_14")') 
+                                print('PWM.stop("P9_14")')
+                        
 
             move.Sync()
                     
