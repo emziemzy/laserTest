@@ -229,11 +229,11 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 2 # mm
+    radiusOuterCircle = 1.2 # mm
     radiusInnerCircle = 0.5 # minimum of 0.5
     
     distanceBetweenInnerCircles = 0.1 # mm
-    markingCount = 1
+    markingCount = 5
     roundDP = 3
 
     fillInCircle = True
@@ -256,7 +256,7 @@ if __name__ == '__main__':
                 for i in range(len(filledInArray)):
                     point = point_c - filledInArray[i]
                     if (i%2) == 1:
-                        RunPoint(move, point*4,"SpeedL=1")
+                        RunPoint(move, point,"SpeedL=1")
                         WaitArrive(point)
                         move.Sync()
                     else:
