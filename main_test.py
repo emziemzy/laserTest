@@ -229,10 +229,9 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
-    radiusOuterCircle = 2 # mm
-    radiusInnerCircle = 0.5
-    distanceBetweenInnerCircles = 0.1 # mm
-    markingCount = 5
+    radiusOuterCircle = 4 # mm
+    radiusInnerCircle = 1
+    distanceBetweenInnerCircles = 0.5 # mm
     roundDP = 3
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
@@ -259,18 +258,14 @@ if __name__ == '__main__':
                 print("point_c1:", point_c1)
                 print("point_c2:", point_c2)
                 print("point_c3:", point_c3)
-            
+        
                 RunPoint(move, point_c1,"SpeedL=1")
                 WaitArrive(point_c1)
                 move.Sync()
-                RunCircle(move, point_c2,point_c3,markingCount,"SpeedL=1","AccL=1")
-                #MarkTilArrive(point_c3,True)
-                move.Sync()
-                MarkTilArrive(point_c1)
-                #compensating
-                RunPoint(move, point_c1,"SpeedL=1")
-                WaitArrive(point_c1)
                 
+                RunCircle(move, point_c2,point_c3,1,"SpeedL=1","AccL=1")
+                #MarkTilArrive(point_c3,True)
+                MarkTilArrive(point_c1)
                 move.Sync()
                 #RunPoint(move, point_c1,"SpeedL=100")
                 if laserOn:
@@ -280,7 +275,6 @@ if __name__ == '__main__':
                         laserOn = False
                     else:
                         print('PWM.stop("P9_14")') 
-                move.Sync()
         
                 radiusCurrent = round(radiusCurrent+distanceBetweenInnerCircles,roundDP)
         
