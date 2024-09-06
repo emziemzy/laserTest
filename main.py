@@ -262,6 +262,14 @@ if __name__ == '__main__':
                         RunPoint(move, point_c - filledInArray[i],"SpeedL=1")
                         MarkTilArrive(point_c)
                         move.Sync()
+                        if laserOn:
+                            if isBeaglebone:
+                                PWM.stop("P9_14")
+                                print("Laser stopping")
+                                laserOn = False
+                            else:
+                                print('PWM.stop("P9_14")') 
+                        move.Sync()
                     
 
             radiusCurrent = radiusInnerCircle
