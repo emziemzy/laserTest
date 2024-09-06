@@ -230,10 +230,14 @@ if __name__ == '__main__':
     circleCentreX = -30
     circleCentreY = 50
     radiusOuterCircle = 2 # mm
-    radiusInnerCircle = 0.5
+    radiusInnerCircle = 0.5 # minimum of 0.5
+    
     distanceBetweenInnerCircles = 0.1 # mm
     markingCount = 1
     roundDP = 3
+
+    fillInCircle = True
+    filledInArray = [[-0.4,-0.3,0,0,0,0],[-0.4,0.3,0,0,0,0],[-0.3,-0.4,0,0,0,0],[-0.3,0.4,0,0,0,0],[-0.2,-0.458257569495584,0,0,0,0],[-0.2,0.458257569495584,0,0,0,0],[-0.1,-0.489897948556636,0,0,0,0],[-0.1,0.489897948556636,0,0,0,0],[0,-0.5,0,0,0,0],[0,0.5,0,0,0,0],[0.1,-0.489897948556636,0,0,0,0],[0.1,0.489897948556636,0,0,0,0],[0.2,-0.458257569495584,0,0,0,0],[0.2,0.458257569495584,0,0,0,0],[0.3,-0.4,0,0,0,0],[0.3,0.4,0,0,0,0],[0.4,-0.3,0,0,0,0],[0.4,0.3,0,0,0,0],]
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
 
@@ -246,6 +250,19 @@ if __name__ == '__main__':
             point_c = np.round(np.array([circleCentreX, circleCentreY, markingHeight, 90, 0, 30]),decimals=roundDP)
             RunPoint(move, point_c,"SpeedL=100")
             WaitArrive(point_c)
+            move.Sync()
+            
+            if fillInCircle:
+                for i in range(len(filledInArray)):
+                    if (i%2) == 2:
+                        RunPoint(move, point_c - filledInArray[i],"SpeedL=1")
+                        WaitArrive(point_c)
+                        move.Sync()
+                    else:
+                        RunPoint(move, point_c - filledInArray[i],"SpeedL=1")
+                        MarkTilArrive(point_c)
+                        move.Sync()
+                    
 
             radiusCurrent = radiusInnerCircle
             while (radiusCurrent < radiusOuterCircle):
