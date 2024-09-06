@@ -236,7 +236,7 @@ if __name__ == '__main__':
     markingCount = 1
     roundDP = 3
 
-    fillInCircle = True
+    fillInCircle = False
     filledInArray = [[-0.4,-0.3,0,0,0,0],[-0.4,0.3,0,0,0,0],[-0.2,-0.4583,0,0,0,0],[-0.2,0.4583,0,0,0,0],[0,-0.5,0,0,0,0],[0,0.5,0,0,0,0],[0.2,-0.4583,0,0,0,0],[0.2,0.4583,0,0,0,0],[0.4,-0.3,0,0,0,0],[0.4,0.3,0,0,0,0]]
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
