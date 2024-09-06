@@ -237,7 +237,7 @@ if __name__ == '__main__':
     roundDP = 3
 
     fillInCircle = True
-    filledInArray = [[-0.4,-0.3,0,0,0,0],[-0.4,0.3,0,0,0,0],[-0.3,-0.4,0,0,0,0],[-0.3,0.4,0,0,0,0],[-0.2,-0.4583,0,0,0,0],[-0.2,0.4583,0,0,0,0],[-0.1,-0.4899,0,0,0,0],[-0.1,0.4899,0,0,0,0],[0,-0.5,0,0,0,0],[0,0.5,0,0,0,0],[0.1,-0.4899,0,0,0,0],[0.1,0.4899,0,0,0,0],[0.2,-0.4583,0,0,0,0],[0.2,0.4583,0,0,0,0],[0.3,-0.4,0,0,0,0],[0.3,0.4,0,0,0,0],[0.4,-0.3,0,0,0,0],[0.4,0.3,0,0,0,0],]
+    filledInArray = [[-0.4,-0.3,0,0,0,0],[-0.4,0.3,0,0,0,0],[-0.2,-0.4583,0,0,0,0],[-0.2,0.4583,0,0,0,0],[0,-0.5,0,0,0,0],[0,0.5,0,0,0,0],[0.2,-0.4583,0,0,0,0],[0.2,0.4583,0,0,0,0],[0.4,-0.3,0,0,0,0],[0.4,0.3,0,0,0,0]]
 
     point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
 
@@ -251,10 +251,11 @@ if __name__ == '__main__':
             RunPoint(move, point_c,"SpeedL=100")
             WaitArrive(point_c)
             move.Sync()
+
             
             if fillInCircle:
                 for i in range(len(filledInArray)):
-                    point = point_c - filledInArray[i]
+                    point = point_c - filledInArray[i] -
                     if (i%2) == 1:
                         RunPoint(move, point,"SpeedL=1")
                         WaitArrive(point)
