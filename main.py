@@ -256,12 +256,12 @@ if __name__ == '__main__':
                 for i in range(len(filledInArray)):
                     point = point_c - filledInArray[i]
                     if (i%2) == 1:
-                        RunPoint(move, point,"SpeedL=1")
+                        RunPoint(move, point*4,"SpeedL=1")
                         WaitArrive(point)
                         move.Sync()
                     else:
                         
-                        RunPoint(move, point,"SpeedL=1")
+                        RunPoint(move, point*4,"SpeedL=1")
                         MarkTilArrive(point)
                         move.Sync()
                         
