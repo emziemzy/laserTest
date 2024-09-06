@@ -269,7 +269,6 @@ if __name__ == '__main__':
                                 laserOn = False
                             else:
                                 print('PWM.stop("P9_14")') 
-                        move.Sync()
                     
 
             radiusCurrent = radiusInnerCircle
@@ -305,7 +304,6 @@ if __name__ == '__main__':
                         laserOn = False
                     else:
                         print('PWM.stop("P9_14")') 
-                move.Sync()
         
                 radiusCurrent = round(radiusCurrent+distanceBetweenInnerCircles,roundDP)
         
