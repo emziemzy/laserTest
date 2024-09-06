@@ -261,7 +261,7 @@ if __name__ == '__main__':
                         move.Sync()
                     else:
                         
-                        RunPoint(move, point*4,"SpeedL=1")
+                        RunPoint(move, point,"SpeedL=1")
                         MarkTilArrive(point)
                         move.Sync()
                         
