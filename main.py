@@ -221,7 +221,7 @@ if __name__ == '__main__':
     print("Complete enabling:)")
     print("Loop execution...")
 
-    dashboard.SpeedFactor(10)
+    dashboard.SpeedFactor(1)
     dashboard.SetCollisionLevel(5)
 
     # circle marking parameters
@@ -232,7 +232,7 @@ if __name__ == '__main__':
     armRX = 92
     armRY = 2
     armRZ = -65
-    radiusOuterCircle = 0.6 # mm
+    radiusOuterCircle = 0.61 # mm
     radiusInnerCircle = 0.5 # minimum of 0.5
     
     distanceBetweenInnerCircles = 0.1 # mm
