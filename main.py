@@ -227,12 +227,12 @@ if __name__ == '__main__':
     # circle marking parameters
     markingHeight = 480
     aboveMarkingHeight = markingHeight -50
-    circleCentreX = -30
-    circleCentreY = 50
+    circleCentreX = -35.61
+    circleCentreY = 30.661
     armRX = 92
     armRY = 2
     armRZ = -65
-    radiusOuterCircle = 1.2 # mm
+    radiusOuterCircle = 0.61 # mm
     radiusInnerCircle = 0.5 # minimum of 0.5
     
     distanceBetweenInnerCircles = 0.1 # mm
