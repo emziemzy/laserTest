@@ -229,6 +229,9 @@ if __name__ == '__main__':
     aboveMarkingHeight = markingHeight -50
     circleCentreX = -30
     circleCentreY = 50
+    armRX = 92
+    armRY = 2
+    armRZ = -65
     radiusOuterCircle = 1.2 # mm
     radiusInnerCircle = 0.5 # minimum of 0.5
     
@@ -236,10 +239,10 @@ if __name__ == '__main__':
     markingCount = 1
     roundDP = 3
 
-    fillInCircle = False
-    filledInArray = [[-0.4,-0.3,0,0,0,0],[-0.4,0.3,0,0,0,0],[-0.2,-0.4583,0,0,0,0],[-0.2,0.4583,0,0,0,0],[0,-0.5,0,0,0,0],[0,0.5,0,0,0,0],[0.2,-0.4583,0,0,0,0],[0.2,0.4583,0,0,0,0],[0.4,-0.3,0,0,0,0],[0.4,0.3,0,0,0,0]]
+    fillInCircle = True
+    filledInArray = [[-0.6,0,0,0,0,0],[-0.4,-0.447,0,0,0,0],[-0.4,0.447,0,0,0,0],[-0.2,0.566,0,0,0,0],[-0.2,-0.566,0,0,0,0],[0,-0.6,0,0,0,0],[0,0.6,0,0,0,0],[0.2,-0.566,0,0,0,0],[0.2,0.566,0,0,0,0],[0.4,-0.477,0,0,0,0],[0.4,0.477,0,0,0,0]]
 
-    point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, 90, 0, 30]),decimals=roundDP)
+    point_init = np.round(np.array([circleCentreX, circleCentreY, aboveMarkingHeight, armRX, armRY, armRZ]),decimals=roundDP)
 
     runCount = 0
     while True:
@@ -247,7 +250,7 @@ if __name__ == '__main__':
             RunPoint(move, point_init,"SpeedL=100")
             WaitArrive(point_init)
 
-            point_c = np.round(np.array([circleCentreX, circleCentreY, markingHeight, 90, 0, 30]),decimals=roundDP)
+            point_c = np.round(np.array([circleCentreX, circleCentreY, markingHeight, armRX, armRY, armRZ]),decimals=roundDP)
             RunPoint(move, point_c,"SpeedL=100")
             WaitArrive(point_c)
             move.Sync()
@@ -283,7 +286,7 @@ if __name__ == '__main__':
                 print("radiusCurrent: ", radiusCurrent)
                 print("distanceBetweenInnerCircles: ", distanceBetweenInnerCircles)
                 # Update point values
-                point_c1 = np.round(np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, 90, 0, 30]),decimals=roundDP)
+                point_c1 = np.round(np.array([circleCentreX-radiusCurrent+distanceBetweenInnerCircles, circleCentreY, markingHeight, armRX, armRY, armRZ]),decimals=roundDP)
                 point_c2 = np.round(point_c1 +np.array([radiusCurrent-distanceBetweenInnerCircles,distanceBetweenInnerCircles-radiusCurrent, 0, 0, 0, 0]),decimals=roundDP)
                 point_c3 = np.round(point_c1 + np.array([2*(radiusCurrent-distanceBetweenInnerCircles), 0, 0, 0, 0, 0]),decimals=roundDP)
                 
@@ -317,7 +320,7 @@ if __name__ == '__main__':
             #final circle marking
             print("final circle marking")
         
-            point_c1 = np.round(np.array([circleCentreX-radiusOuterCircle, circleCentreY, markingHeight, 90, 0, 30]),decimals=roundDP)
+            point_c1 = np.round(np.array([circleCentreX-radiusOuterCircle, circleCentreY, markingHeight, armRX, armRY, armRZ]),decimals=roundDP)
             point_c2 = np.round(point_c1 + [radiusOuterCircle,-radiusOuterCircle, 0, 0, 0, 0],decimals=roundDP)
             point_c3 = np.round(point_c1 + [2*radiusOuterCircle, 0, 0, 0, 0, 0],decimals=roundDP)
             
@@ -346,8 +349,6 @@ if __name__ == '__main__':
                 else:
                     print('PWM.stop("P9_14")') 
             move.Sync()
-                    
-            point_end = np.round(np.array(point_c1 + [0,0,-50,0,0,0]),decimals=roundDP)
             
             RunPoint(move,point_init,"SpeedL=100")
             WaitArrive(point_init)
